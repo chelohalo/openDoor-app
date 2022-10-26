@@ -1,11 +1,13 @@
 import { useDispatch } from "react-redux"
 import { useState } from "react"
 import { filterHomesAction } from "../actions/homesActions"
+import {useNavigate} from 'react-router-dom'
 
 const SearchBar = () => {
   const [input, setInput] = useState('')
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   
 
   const handleChange = (e) => {
@@ -15,6 +17,7 @@ const SearchBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(filterHomesAction(input))
+    navigate('/?page=1')
   }
 
   
