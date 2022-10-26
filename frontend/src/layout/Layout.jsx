@@ -12,7 +12,7 @@ const Layout = () => {
 
   useEffect(()=> {
       dispatch ( getHomesAction() )
-  }, [])
+  }, [dispatch])
   
   return (
     <div>
