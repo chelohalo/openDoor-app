@@ -12,9 +12,9 @@ const Houses = () => {
   const page = new URLSearchParams(search).get('page') || 1
 
   const [currentPage, setCurrentPage] = useState(page)
-  const [homesPerPage, setHomesPerPage] = useState(10)
+  const homesPerPage = 10
 
-  const homes = useSelector(state => state.homes.homesByStatus) // es un array
+  const homes = useSelector(state => state.homes.homesByStatus)
 
   const indexOfLastHome = currentPage * homesPerPage
   const indexOfFirstHome = indexOfLastHome - homesPerPage
@@ -32,21 +32,20 @@ const Houses = () => {
       <Filter />
       
       {currentHomes.map((home, index) => 
-          <>
+          <div key={home._id}>
             <House
-              key={home._id} 
               images={home.images} 
               price={home.purchasePrice}
-              bedroom={home.units[0].bedroom} 
-              bathroom={home.units[0].bathroom} 
-              squareFootage={home.units[0].squareFootage}
+              bedroom={home.units[0]?.bedroom} 
+              bathroom={home.units[0]?.bathroom} 
+              squareFootage={home.units[0]?.squareFootage}
               streetNumber={home.addressObject.streetNumber}  
-              route={home.addressObject.route} 
-              locality={home.addressObject.locality}  
-              stateCode={home.addressObject.stateCode}  
+              route={home.addressObject?.route} 
+              locality={home.addressObject?.locality}  
+              stateCode={home.addressObject?.stateCode}  
             />
             {index===1 && <Offer />}
-          </>
+          </div>
         
       )}
 
